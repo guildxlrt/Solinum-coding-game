@@ -3,8 +3,8 @@ import mongoose, { Document, Schema } from 'mongoose';
 export interface IPoint {
     name : string;
     email : string;
-    address : string;
-    interest : number;
+    address : [number, number];
+    interest : [number, number, number];
     status : boolean;
     state : boolean;
 }
@@ -15,7 +15,7 @@ const PointSchema: Schema = new Schema(
     {
         name : { type : String, required: true },
         email : { type : String, required: true },
-        address : { type : String, required: true },
+        address : { type : Array, required: true },
         interest : { type : Array, required: true },
         status : { type : Boolean, default: false },
         state : { type : Boolean, default : null }

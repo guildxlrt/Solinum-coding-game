@@ -45,9 +45,15 @@ const updatePoint = (req : Request, res : Response, next : NextFunction) => {
     return Point.findById(pointId)
     .then((point) => {
         if (point) {
-            const updates =  { ...req.body }
-            point.set(updates)
+            const updates = { name : point.name, address : point.address, interest : point.interest }
 
+            if (req.body.name) updates.name = req.body.name
+            if (req.body.address) updates.address = req.body.address
+            if (req.body.interest) updates.interest = req.body.interest
+
+            console.log(updates)
+                        
+            point.set(updates)
 
             return point
                 .save()
@@ -72,11 +78,12 @@ const changeState = (req : Request, res : Response, next : NextFunction) => {
     return Point.findById(pointId)
     .then((point) => {
         if (point) {
-            const updates =  { ...req.body }
+            const updates =  { state : req.body.state, status : point.status }
             
             switch (req.body.state) {
                 case true :
                     updates.status = true
+                    updates.state = true
                     point.set(updates)
 
                     return point
@@ -90,6 +97,7 @@ const changeState = (req : Request, res : Response, next : NextFunction) => {
                         .catch((error) => res.status(500).json({ error }));
                 case false :
                     updates.status = false
+                    updates.state = false
                     point.set(updates)
 
                     return point

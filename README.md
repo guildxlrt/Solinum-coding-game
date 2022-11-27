@@ -1,5 +1,6 @@
 Solinum - Coding game
 
+
 PRÉAMBULE :
 
 Soliguide référence des points d’intérêt géolocalisé (POI) pour faciliter l’accès à des services
@@ -12,6 +13,7 @@ Mais heureusement tu es là ! Et l’équipe Solinum compte sur toi et tes talen
 développeur/développeuse pour aider les équipes à offrir la meilleure information aux personnes
 dans le besoin.
 
+
 INSTRUCTION :
 
 Créer une application web simple avec un ou plusieurs dashboard(s) qui permettra de réaliser les fonctions suivantes :
@@ -23,7 +25,9 @@ Créer une application web simple avec un ou plusieurs dashboard(s) qui permettr
 • Lorsqu’un POI n’est pas valide , un bouton permet de changer l’État du POI concerné en « Besoin d’information ».
 
 BONUS (si l’envie vous prend !) :
-• Voir les signalements sur une carte (par exemple dans un dashboard “MAP”)ANNEXES
+• Voir les signalements sur une carte (par exemple dans un dashboard “MAP”)
+
+ANNEXES
 
 Champs du formulaire :
 • Nom,

@@ -1,0 +1,14 @@
+.nav-container {
+    background-color: $white;
+    margin: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    
+    img {
+      height: 50px;
+      width: 150px;
+    }
+}    
