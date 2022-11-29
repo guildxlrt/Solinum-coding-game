@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useMemo, useCallback, useRef } from "react";
 import {
   GoogleMap,
@@ -6,15 +7,17 @@ import {
   Circle,
   MarkerClusterer,
 } from "@react-google-maps/api";
+import Places from "./places";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 // type DirectionsResult = google.maps.DirectionsResult;
 type MapOptions = google.maps.MapOptions;
 
 export default function Map() {
+  const [office, setOffice] = useState<LatLngLiteral>()
   const mapRef =  useRef<GoogleMap>()
   const center = useMemo<LatLngLiteral>(
-    () => ({ lat: 48.8931328, lng: 2.1364736 }),
+    () => ({ lat: 46.1390437, lng: 2.434835 }),
     []
   );
   const options = useMemo<MapOptions>(
@@ -24,16 +27,23 @@ export default function Map() {
     }),
     []
   )
+
   const onLoad = useCallback((map : any) => (mapRef.current = map), []);
   
   return (
     <div className="container">
-      <div className="controls">
+      {/* <div className="controls">
         <h1>Comute?</h1>
-      </div>
+        <Places 
+            setOffice={(position) => {
+                setOffice(position);
+                mapRef.current!.panTo(position);
+            }}
+        />
+      </div> */}
       <div className="map">
         <GoogleMap
-          zoom={10}
+          zoom={6}
           center={center}
           mapContainerClassName="map-container"
           options={options}

@@ -6,15 +6,18 @@ const newPoint = (req : Request, res : Response, next : NextFunction) => {
 
     //--------Verification email
     const emailVal = new RegExp(/^([a-z0-9._-]+)@([a-z0-9]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/, 'g');
+    
+
     if (emailVal.test(req.body.email)) {
-        const { name, email, address, interest } = req.body;
+        const { name, email, position, address, interests } = req.body;
 
         const point = new Point({
             _id : new mongoose.Types.ObjectId(),
             name,
             email,
+            position,
             address,
-            interest
+            interests
         })
 
         return point
@@ -35,7 +38,7 @@ const newPoint = (req : Request, res : Response, next : NextFunction) => {
 
 const getAll = (req : Request, res : Response, next : NextFunction) => {
     return Point.find()
-    .then(points => res.status(200).json({ points }))
+    .then(points => res.status(200).json(points))
     .catch(error => res.status(500).json({ error }))
 };
 
@@ -45,13 +48,19 @@ const updatePoint = (req : Request, res : Response, next : NextFunction) => {
     return Point.findById(pointId)
     .then((point) => {
         if (point) {
-            const updates = { name : point.name, address : point.address, interest : point.interest }
+            const updates = {
+                name : point.name,
+                position : point.position,
+                address : point.address,
+                interests : point.interests
+            }
 
             if (req.body.name) updates.name = req.body.name
-            if (req.body.address) updates.address = req.body.address
-            if (req.body.interest) updates.interest = req.body.interest
-
-            console.log(updates)
+            if (req.body.position && req.body.address) {
+                updates.position = req.body.position
+                updates.address = req.body.address
+            }
+            if (req.body.interests) updates.interests = req.body.interests
                         
             point.set(updates)
 

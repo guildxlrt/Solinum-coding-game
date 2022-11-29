@@ -7,7 +7,7 @@ footer {
         padding: 4%;
         padding-bottom: 6%;
 
-        @media screen and(max-width: 590px) {
+        @media screen and (max-width: 590px) {
             flex-direction: column;
             min-height: 200px;
             padding: 3%;
@@ -28,7 +28,7 @@ footer {
             }
         }
 
-        @media screen and(max-width: 590px) {
+        @media screen and (max-width: 590px) {
             flex-direction: column;
             min-height: 230px;
             min-width: 130px;

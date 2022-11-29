@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '../../pages/Home';
+import Home from '../../pages';
 import Navbar from '../Navbar';
 
 function index() {
   return (
     <BrowserRouter>
-        <Navbar></Navbar>
+        <Navbar/>
         <Routes>
             <Route path="/" element={<Home />} />
         </Routes>
