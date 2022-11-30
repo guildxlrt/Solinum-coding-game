@@ -3,7 +3,7 @@ import { IPoint } from './@types/point';
 
 export type ListContextType = {
     list : IPoint[] | null,
-    updateList : (newPoint : IPoint[]) => void
+    updateList : (newList : IPoint[]) => void
 }
 
 export const ListContext =  createContext<ListContextType>({

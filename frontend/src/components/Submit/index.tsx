@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { INewPoint } from '../../@types/point';
+import { INewPoint, IPoint } from '../../@types/point';
 import { useListContext } from '../../appContext';
 import { reverseGeocode } from '../../utils/googleapi';
 
@@ -50,7 +50,12 @@ export default function Submit() {
       })
       .then((res) => {
         alert("Le lieu a bien ete cree !")
-        updateList(res.data.point)
+        
+        // UPDATE THE RENDER
+        const emptyArray = new Array<IPoint>()
+        const newList = emptyArray.concat(list!)
+        newList.push(res.data.point)
+        updateList(newList)
       })
       .catch((error) => {
         console.error(error)

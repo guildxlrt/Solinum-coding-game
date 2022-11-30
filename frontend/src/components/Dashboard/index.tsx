@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useListContext } from '../../appContext'
 import { isEmpty } from '../../utils/utils'
 import Place from './Place'
 
 const Dashboard : React.FC = () => {
     const { list } = useListContext()
+
+    const listLenght = list!.length
+
+    useEffect(() => {
+        console.log('New list')
+        console.log(listLenght)
+    }, [list, listLenght])
+
 
     return (
         <>
