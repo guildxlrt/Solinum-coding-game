@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
-import { PointsContext } from '../../appContext'
+import React from 'react'
+import { useListContext } from '../../appContext'
 import { isEmpty } from '../../utils/utils'
 import Place from './Place'
 
 const Dashboard : React.FC = () => {
-    const points = useContext(PointsContext)
+    const { list } = useListContext()
 
     return (
         <>
             <ul>
-                {!(isEmpty(points![0])) &&
-                    points!.map((point) => {
+                {!(isEmpty(list![0])) &&
+                    list!.map((point) => {
                         return <Place datas={point}/>
                     })
                 }

@@ -16,7 +16,7 @@ export interface IPoint {
     updatedAt : string;
 }
 
-export interface IFormDatas {
+export interface INewPoint {
     name : string;
     email : string;
     position : [number, number];

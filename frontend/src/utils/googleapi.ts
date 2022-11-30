@@ -14,5 +14,5 @@ export async function reverseGeocode(lat : number, lng : number) {
     .then((res) => {
       return res.data.results[0].formatted_address
     })
-    .catch((error) => console.log(error))
+    .catch((error) => console.error(error))
 }

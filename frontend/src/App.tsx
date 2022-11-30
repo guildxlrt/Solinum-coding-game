@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { IPoint } from './@types/point';
-import { PointsContext } from './appContext';
+import { ListContext } from './appContext';
 import Footer from './components/Footer';
 import AppRoutes from './components/Routes'
 
 function App() {
-  const [locations, setLocations] = useState<IPoint[]>([])
+  const [list, setList] = useState<IPoint[] | null>([])
+  function updateList( newList : IPoint[]) {
+    setList(newList)
+}
 
   const apiPath: string = process.env.REACT_APP_API_URL!;
 
@@ -18,19 +21,18 @@ function App() {
         withCredentials : false
       })
       .then((res) => {
-        setLocations(res.data)
+        setList(res.data)
       })
       .catch((error) => console.log(error)) 
     })()
-
   }, []);
-
+  
   return (
     <div className="App">
       <header className="App-header">
-        <PointsContext.Provider value={locations}>
+        <ListContext.Provider value={{list, updateList}}>
           <AppRoutes/>
-        </PointsContext.Provider>
+        </ListContext.Provider>
       <Footer></Footer>
       </header>
     </div>

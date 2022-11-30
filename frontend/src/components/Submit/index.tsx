@@ -1,12 +1,21 @@
+import axios from 'axios';
 import React, { useState } from 'react'
-import { IFormDatas } from '../../@types/point';
+import { INewPoint } from '../../@types/point';
+import { useListContext } from '../../appContext';
 import { reverseGeocode } from '../../utils/googleapi';
 
 export default function Submit() {
-  // handle render
+  // API CALLS
+  const apiPath: string = process.env.REACT_APP_API_URL!;
+
+  // UPDATE THE LIST
+  const { list, updateList } = useListContext()
+
+  // HANDLE RENDER
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-
+  const [address, setAddress] = useState('')
+  //const [position, setPosition] = useState([])
   const [dist, setDist] = useState<boolean>(false)
   const [douche, setDouche] = useState<boolean>(false)
   const [wifi, setWifi] = useState<boolean>(false)
@@ -14,12 +23,11 @@ export default function Submit() {
   const handleValidation = async (e : any) => {
     e.preventDefault();
 
-    // TESTING //
-    const formDatas : IFormDatas = {
+    const formDatas : INewPoint = {
       "name" : name,
       "email" : email,
       "position" : [ 48.8941328, 2.1354736 ],
-      "address" : "2 Av. des Pages, 78110 Le Vésinet, France",
+      "address" : address,
       "interests" : {
         "distribution" : dist,
         "douche" : douche,
@@ -30,12 +38,26 @@ export default function Submit() {
     const lat = formDatas.position[0];
     const lng = formDatas.position[1];
 
-    (async function test() {
+    (async function submitForm() {
       const data = await reverseGeocode(lat, lng)
-      console.log(formDatas)
+      setAddress(await data)
+      
+      await axios({
+        method : "post",
+        url : `${apiPath}/points/new`,
+        withCredentials : false,
+        data : formDatas
+      })
+      .then((res) => {
+        alert("Le lieu a bien ete cree !")
+        updateList(res.data.point)
+      })
+      .catch((error) => {
+        console.error(error)
+        return { "error" : error }
+      })
     })()
   }
-
 
   return (
     <div>
@@ -66,7 +88,7 @@ export default function Submit() {
           className='address input'
           type="text"
           id="address"
-          value={"48.8941328, 2.1354736"}
+          value={address}
         />
         <br/>
 
@@ -96,8 +118,6 @@ export default function Submit() {
         <label htmlFor="wifi">Wifi</label>
         <br/>
         
-        
-
         <button onClick={handleValidation}>Submit</button>
       </form>
     </div>
