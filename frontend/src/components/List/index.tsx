@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useListContext } from '../../appContext'
 import { isEmpty } from '../../utils/utils'
 import Place from './Place'
 
-const Dashboard : React.FC = () => {
+const List : React.FC = () => {
     const { list } = useListContext()
 
     return (
         <>
-            <ul>
+            <div className='places-container'>
                 {!(isEmpty(list![0])) &&
                     list!.map((point) => {
                         return <Place datas={point}/>
                     })
                 }
-            </ul>
+            </div>
         </>
       )
 }
 
-export default Dashboard
+export default List

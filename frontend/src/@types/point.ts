@@ -10,8 +10,8 @@ export interface IPoint {
         douche : boolean,
         wifi : boolean
     };
-    status : boolean;
-    state : boolean;
+    status : boolean | null;
+    state : boolean | null;
     createdAt : string;
     updatedAt : string;
 }

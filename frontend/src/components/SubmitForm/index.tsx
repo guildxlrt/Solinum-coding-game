@@ -66,76 +66,85 @@ export default function SubmitForm() {
         })
       }
     }
-    
-    
   }
   
   return (
-    <div>
+    <div className='submit-container'>
+      <h2>Ajouter un emplacement</h2>
       <form>
-        <h4 className='name'>Nom :</h4>
-        <input
-          className='name input'
-          type="text"
-          id="name"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          placeholder="nom de l'etablissement"
-        />
-        <br/>
-
-        <h4 className='email'>Em@il :</h4>
-        <input
-          className='email input'
-          type="text"
-          id="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          placeholder="contact email"
-        />
-        <br/>
-
-        <h4 className='address'>Adresse :</h4>
-        <Autocomplete>
+        <div className='name'>
+          <h4 className='title'>Nom :</h4>
           <input
-              className='address input'
-              type="text"
-              id="address"
-              onChange={(e) => setAddress(e.target.value)}
-              value={address}
-              placeholder="contact postal"
-              ref={addressRef}
-            />
-        </Autocomplete>
-        <br/>
+            type="text"
+            id="name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder="nom de l'etablissement"
+          />
+        </div>
 
-        <h4 className='interests'>Interets :</h4>
-        <input
-          className='distribution checkbox'
-          type="checkbox"
-          id="distribution"
-          onChange={(e) => setDist(!dist)}
-        />
-        <label htmlFor="distribution">Distribution</label>
-        <br/>
-        <input
-          className='douche checkbox'
-          type="checkbox"
-          id="douche"
-          onChange={(e) => setDouche(!douche)}
-        />
-        <label htmlFor="douche">Douche</label>
-        <br/>
-        <input
-          className='wifi checkbox'
-          type="checkbox"
-          id="wifi"
-          onChange={(e) => setWifi(!wifi)}
-        />
-        <label htmlFor="wifi">Wifi</label>
-        <br/>
+        <div className='email'>
+          <h4 className='title'>Em@il :</h4>
+          <input
+            type="text"
+            id="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            placeholder="contact"
+          />
+          <br/>
+        </div>
+
+        <div className='address'>
+          <h4 className='title'>Adresse :</h4>
+          <Autocomplete>
+          <input
+            type="text"
+            id="address"
+            onChange={(e) => setAddress(e.target.value)}
+            value={address}
+            placeholder="contact postal"
+            ref={addressRef}
+          />
+          </Autocomplete>
+        </div>
         
-        <button onClick={handleValidation}>Submit</button>
+
+        <div className='interests'>
+          <h4 className='title'>Interets :</h4>
+          
+          <div className='checks-container'>
+            <div className='distribution'>
+              <input
+                type="checkbox"
+                id="distribution-check"
+                onChange={(e) => setDist(!dist)}
+              />
+              <label htmlFor="distribution">Distribution</label>
+            </div>
+          
+            <div className='douche'>
+              <input
+                type="checkbox"
+                id="douche-check"
+                onChange={(e) => setDouche(!douche)}
+              />
+              <label htmlFor="douche">Douche</label>
+            </div>
+          
+            <div className='wifi'>
+              <input
+                type="checkbox"
+                id="wifi-check"
+                onChange={(e) => setWifi(!wifi)}
+              />
+              <label htmlFor="wifi">Wifi</label>
+            </div>
+          </div>
+          
+        </div>
+
+        <button onClick={handleValidation}>Envoyer</button>
       </form>
     </div>
   )

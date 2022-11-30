@@ -11,7 +11,7 @@ export interface IPoint {
         wifi : boolean
     };
     status : boolean;
-    state : boolean;
+    state : boolean | null;
 }
 
 export interface IPointModel extends IPoint, Document {}
