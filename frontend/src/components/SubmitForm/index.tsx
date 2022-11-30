@@ -1,11 +1,12 @@
 import { Autocomplete } from '@react-google-maps/api';
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { INewPoint, IPoint } from '../../@types/point';
 import { useListContext } from '../../appContext';
+import { geocoding } from '../../utils/googleapi';
 
 export default function SubmitForm() {
-  // API CALLS
+  // API URL
   const apiPath: string = process.env.REACT_APP_API_URL!;
   // UPDATE THE LIST
   const { list, updateList } = useListContext()
@@ -13,58 +14,60 @@ export default function SubmitForm() {
   // HANDLE RENDER
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
-  const [position, setPosition] = useState<[number, number]>([0,0])
-  const [dist, setDist] = useState(false)
-  const [douche, setDouche] = useState(false)
-  const [wifi, setWifi] = useState(false)
+  const [dist, setDist] = useState<boolean>(false)
+  const [douche, setDouche] = useState<boolean>(false)
+  const [wifi, setWifi] = useState<boolean>(false)
 
   const [address, setAddress] = useState('')
-  const addressRef = React.useRef<HTMLInputElement>(null)
+  const addressRef = useRef<HTMLInputElement>(null)
 
   const handleValidation = async (e : any) => {
     e.preventDefault();
-    const formDatas : INewPoint = {
-      "name" : name,
-      "email" : email,
-      "position" : position,
-      "address" : addressRef.current!.value,
-      "interests" : {
-        "distribution" : dist,
-        "douche" : douche,
-        "wifi" : wifi
+
+    const returnedAddress = addressRef.current!.value!
+    setAddress(returnedAddress)
+
+    // GET MAP POSITION
+    const data = await geocoding(addressRef.current!.value)
+    
+    // VERIFICATION OF DATA CONFORMITY
+    if(data) {
+      if((typeof data.lat === 'number') && (typeof data.lng === 'number')) {
+        const formDatas : INewPoint = {
+          "name" : name,
+          "email" : email,
+          "position" : [data.lat, data.lng],
+          "address" : returnedAddress,
+          "interests" : {
+            "distribution" : dist,
+            "douche" : douche,
+            "wifi" : wifi
+          }
+        }
+
+        await axios({
+          method : "post",
+          url : `${apiPath}/points/new`,
+          withCredentials : false,
+          data : formDatas
+        })
+        .then((res) => {
+          alert("Le lieu a bien ete cree !")
+          
+          // UPDATE THE RENDER
+          const emptyArray = new Array<IPoint>()
+          const newList = emptyArray.concat(list!)
+          newList.push(res.data.point)
+          updateList(newList)
+        })
+        .catch((error) => {
+          console.error(error)
+          return { "error" : error }
+        })
       }
     }
-
-    (async function submitForm() {
-      // Address formating
-      //const data = await reverseGeocoding(lat, lng)
-      //setAddress(await data)
-
-      setPosition([23.56445, 56.3434])
-
-      console.log(position)
-      
-
-      await axios({
-        method : "post",
-        url : `${apiPath}/points/new`,
-        withCredentials : false,
-        data : formDatas
-      })
-      .then((res) => {
-        alert("Le lieu a bien ete cree !")
-        
-        // UPDATE THE RENDER
-        const emptyArray = new Array<IPoint>()
-        const newList = emptyArray.concat(list!)
-        newList.push(res.data.point)
-        updateList(newList)
-      })
-      .catch((error) => {
-        console.error(error)
-        return { "error" : error }
-      })
-    })()
+    
+    
   }
   
   return (

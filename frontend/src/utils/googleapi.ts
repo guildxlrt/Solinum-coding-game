@@ -17,8 +17,8 @@ export async function reverseGeocoding(lat : number, lng : number) {
     .catch((error) => console.error(error))
 }
 
-export async function geocoding(lat : number, lng : number) {
-  const url = `${geocodeApiPath}?key=${apiKey}&latlng=${lat},${lng}`;
+export async function geocoding(address : string) {
+  const url = `${geocodeApiPath}?key=${apiKey}&address=${address}`;
 
   return await axios({
     method : "get",
@@ -26,7 +26,7 @@ export async function geocoding(lat : number, lng : number) {
     withCredentials : false
   })
   .then((res) => {
-    return res.data.results[0].formatted_address
+    return res.data.results[0].geometry.location
   })
   .catch((error) => console.error(error))
 }
