@@ -7,7 +7,6 @@ import {
   Circle,
   MarkerClusterer,
 } from "@react-google-maps/api";
-import Places from "./places";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 // type DirectionsResult = google.maps.DirectionsResult;
@@ -32,15 +31,7 @@ export default function Map() {
   
   return (
     <div className="container">
-      {/* <div className="controls">
-        <h1>Comute?</h1>
-        <Places 
-            setOffice={(position) => {
-                setOffice(position);
-                mapRef.current!.panTo(position);
-            }}
-        />
-      </div> */}
+      
       <div className="map">
         <GoogleMap
           zoom={6}

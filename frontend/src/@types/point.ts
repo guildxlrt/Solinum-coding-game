@@ -19,7 +19,7 @@ export interface IPoint {
 export interface INewPoint {
     name : string;
     email : string;
-    position : [number, number];
+    position : [number, number] | null;
     address : string;
     interests : {
         distribution : boolean,

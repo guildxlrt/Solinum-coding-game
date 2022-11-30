@@ -6,14 +6,6 @@ import Place from './Place'
 const Dashboard : React.FC = () => {
     const { list } = useListContext()
 
-    const listLenght = list!.length
-
-    useEffect(() => {
-        console.log('New list')
-        console.log(listLenght)
-    }, [list, listLenght])
-
-
     return (
         <>
             <ul>

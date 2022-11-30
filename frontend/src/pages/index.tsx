@@ -2,7 +2,7 @@ import React from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import Map from '../components/Map';
 import Dashboard from "../components/Dashboard";
-import Submit from "../components/Submit";
+import SubmitForm from "../components/SubmitForm";
 
 export const apiKey: string = process.env.REACT_APP_GOOGLE_MAPS_API_KEY!;
 
@@ -15,9 +15,9 @@ export default function Home() {
   if (!isLoaded) return <div>Loading...</div>;
   return (
     <>
-      <Submit/>
+      <SubmitForm/>
       <Dashboard />
-      <Map />
+      {/* <Map /> */}
     </>
   );
 }

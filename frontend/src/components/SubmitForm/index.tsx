@@ -1,33 +1,33 @@
+import { Autocomplete } from '@react-google-maps/api';
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { INewPoint, IPoint } from '../../@types/point';
 import { useListContext } from '../../appContext';
-import { reverseGeocode } from '../../utils/googleapi';
 
-export default function Submit() {
+export default function SubmitForm() {
   // API CALLS
   const apiPath: string = process.env.REACT_APP_API_URL!;
-
   // UPDATE THE LIST
   const { list, updateList } = useListContext()
 
   // HANDLE RENDER
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [name, setName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [position, setPosition] = useState<[number, number]>([0,0])
+  const [dist, setDist] = useState(false)
+  const [douche, setDouche] = useState(false)
+  const [wifi, setWifi] = useState(false)
+
   const [address, setAddress] = useState('')
-  //const [position, setPosition] = useState([])
-  const [dist, setDist] = useState<boolean>(false)
-  const [douche, setDouche] = useState<boolean>(false)
-  const [wifi, setWifi] = useState<boolean>(false)
+  const addressRef = React.useRef<HTMLInputElement>(null)
 
   const handleValidation = async (e : any) => {
     e.preventDefault();
-
     const formDatas : INewPoint = {
       "name" : name,
       "email" : email,
-      "position" : [ 48.8941328, 2.1354736 ],
-      "address" : address,
+      "position" : position,
+      "address" : addressRef.current!.value,
       "interests" : {
         "distribution" : dist,
         "douche" : douche,
@@ -35,13 +35,16 @@ export default function Submit() {
       }
     }
 
-    const lat = formDatas.position[0];
-    const lng = formDatas.position[1];
-
     (async function submitForm() {
-      const data = await reverseGeocode(lat, lng)
-      setAddress(await data)
+      // Address formating
+      //const data = await reverseGeocoding(lat, lng)
+      //setAddress(await data)
+
+      setPosition([23.56445, 56.3434])
+
+      console.log(position)
       
+
       await axios({
         method : "post",
         url : `${apiPath}/points/new`,
@@ -63,10 +66,9 @@ export default function Submit() {
       })
     })()
   }
-
+  
   return (
     <div>
-      <h3>SEARCH</h3>
       <form>
         <h4 className='name'>Nom :</h4>
         <input
@@ -75,31 +77,38 @@ export default function Submit() {
           id="name"
           onChange={(e) => setName(e.target.value)}
           value={name}
+          placeholder="nom de l'etablissement"
         />
         <br/>
 
-        <h4 className='name'>em@il :</h4>
+        <h4 className='email'>Em@il :</h4>
         <input
           className='email input'
           type="text"
           id="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          placeholder="contact email"
         />
         <br/>
 
-        <h4 className='name'>Adresse :</h4>
-        <input
-          className='address input'
-          type="text"
-          id="address"
-          value={address}
-        />
+        <h4 className='address'>Adresse :</h4>
+        <Autocomplete>
+          <input
+              className='address input'
+              type="text"
+              id="address"
+              onChange={(e) => setAddress(e.target.value)}
+              value={address}
+              placeholder="contact postal"
+              ref={addressRef}
+            />
+        </Autocomplete>
         <br/>
 
-        <h4 className='name'>Interets :</h4>
+        <h4 className='interests'>Interets :</h4>
         <input
-          className='distribution input'
+          className='distribution checkbox'
           type="checkbox"
           id="distribution"
           onChange={(e) => setDist(!dist)}
@@ -107,7 +116,7 @@ export default function Submit() {
         <label htmlFor="distribution">Distribution</label>
         <br/>
         <input
-          className='douche input'
+          className='douche checkbox'
           type="checkbox"
           id="douche"
           onChange={(e) => setDouche(!douche)}
@@ -115,7 +124,7 @@ export default function Submit() {
         <label htmlFor="douche">Douche</label>
         <br/>
         <input
-          className='wifi input'
+          className='wifi checkbox'
           type="checkbox"
           id="wifi"
           onChange={(e) => setWifi(!wifi)}
