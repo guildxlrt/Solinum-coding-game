@@ -70,7 +70,7 @@ export default function State({datas} : any) {
       {(clickStatus === true) ? (
           <div className='updating-state'>
             <select
-              id="state-selector"
+              id={"state-selector-"+datas._id}
               onChange={ (e) => setNewStatus(e.target.value) }
             >
               <option className='state-select' value="annuller">annuller</option>
@@ -83,7 +83,7 @@ export default function State({datas} : any) {
           </div>
         ): (
         <button
-          className='icon'
+          className='status-icon'
           onClick={() => setModifyStatus(true)}
         >
           { (datas.status === true) && '🟢' }

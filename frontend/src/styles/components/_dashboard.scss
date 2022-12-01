@@ -11,7 +11,8 @@
             margin: 45px 0px ;
             display: flex;
             flex-direction: row;
-            justify-content: left;          
+            justify-content: left;
+            align-items: flex-start;         
 
             .place-infos {
                 display: flex;
@@ -22,6 +23,9 @@
                     width: auto;
                     height: 50px;
                     margin: 37px 0px 0px 0px;
+                    border-radius: 30px;
+                    position: relative;
+                    top: -22px;
                 }
 
                 .infos {
@@ -85,16 +89,46 @@
                             top: -4px;
                             left: -27px
                         }
-                    }                    
+                    }
+                                      
                     .edit-buttons {
                         display: flex;
                         flex-direction: row;
                         justify-content: space-around;
                         position: relative;
-                        left: -7px;
+                        left: -45px;
+                        button {
+                            border-radius: 30px;
+                        }
                     }
                 }
                     
+            }
+
+            .updating-state {
+                position: relative;
+                top: 25px;
+
+                select {
+                    height: 37px;
+                }
+                
+                button {
+                    padding: 7px;
+                    border-radius: 10%;
+                    background-color: $white;
+                }
+            }
+
+            .status-icon{
+                padding: 7px;
+                height: fit-content;
+                width: fit-content;
+                border-radius: 100%;
+                background-color: $white;
+                size: 20px;
+                position: relative;
+                top: 25px;
             }
         }
     }
@@ -152,6 +186,9 @@
                 justify-content: space-around;
                 position: relative;
                 left: -57px;
+                button {
+                    border-radius: 30px;
+                }
             }
         }
     }
