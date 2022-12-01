@@ -10,7 +10,6 @@ import {
 import { useListContext } from "../../appContext";
 import { isEmpty } from "../../utils/utils";
 
-const { list } = useListContext()
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 // type DirectionsResult = google.maps.DirectionsResult;
@@ -32,10 +31,10 @@ export default function Map() {
   )
 
   const onLoad = useCallback((map : any) => (mapRef.current = map), []);
+  const { list } = useListContext()
 
   return (
-    <div className="container">
-      
+    <div className="container">      
       <div className="map">
         <GoogleMap
           zoom={6}
@@ -44,17 +43,23 @@ export default function Map() {
           options={options}
           onLoad={onLoad}
         >
+          <Marker
+                  position={{
+                    lat : 47.8462217,
+                    lng : 2.3371605
+                  }}
+                />
+                
           {!(isEmpty(list![0])) &&
             list!.map((point) => {
               if (point.status === true) {
-                return <div
-                  className='places-list'
-                >
-                  <Marker position={{
-                      lat : point.position[0],
-                      lng : point.position[1]
-                    }}/>
-                </div>
+                return <Marker
+                  key={point._id}
+                  position={{
+                    lat : point.position[0],
+                    lng : point.position[1]
+                  }}
+                />
               }
           })}
           
