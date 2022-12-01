@@ -1,11 +1,8 @@
 import React from "react";
-import { useState, useMemo, useCallback, useRef } from "react";
+import { useMemo, useCallback, useRef } from "react";
 import {
   GoogleMap,
   Marker,
-  DirectionsRenderer,
-  Circle,
-  MarkerClusterer,
 } from "@react-google-maps/api";
 import { useListContext } from "../../appContext";
 import { isEmpty } from "../../utils/utils";
@@ -16,7 +13,6 @@ type LatLngLiteral = google.maps.LatLngLiteral;
 type MapOptions = google.maps.MapOptions;
 
 export default function Map() {
-  const [office, setOffice] = useState<LatLngLiteral>()
   const mapRef =  useRef<GoogleMap>()
   const center = useMemo<LatLngLiteral>(
     () => ({ lat: 46.1390437, lng: 2.434835 }),
@@ -43,16 +39,10 @@ export default function Map() {
           options={options}
           onLoad={onLoad}
         >
-          <Marker
-                  position={{
-                    lat : 47.8462217,
-                    lng : 2.3371605
-                  }}
-                />
-                
           {!(isEmpty(list![0])) &&
             list!.map((point) => {
               if (point.status === true) {
+                console.log(point.status)
                 return <Marker
                   key={point._id}
                   position={{
@@ -97,16 +87,4 @@ const farOptions = {
   fillOpacity: 0.05,
   strokeColor: "#FF5252",
   fillColor: "#FF5252",
-};
-
-const generateHouses = (position: LatLngLiteral) => {
-  const _houses: Array<LatLngLiteral> = [];
-  for (let i = 0; i < 100; i++) {
-    const direction = Math.random() < 0.5 ? -2 : 2;
-    _houses.push({
-      lat: position.lat + Math.random() / direction,
-      lng: position.lng + Math.random() / direction,
-    });
-  }
-  return _houses;
 };

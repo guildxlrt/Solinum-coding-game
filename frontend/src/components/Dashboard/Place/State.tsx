@@ -86,9 +86,9 @@ export default function State({datas} : any) {
           className='status-icon'
           onClick={() => setModifyStatus(true)}
         >
-          { (datas.status === true) && '🟢' }
-          { (datas.state === false) && '🟡' }
-          { (datas.state === null) && '🔵' }
+          { (datas.status === true) && <span>🟢</span> }
+          { (datas.state === false) && <span>🟡</span> }
+          { (datas.state === null) && <span>🔵</span> }
         </button>
       )}
     </>

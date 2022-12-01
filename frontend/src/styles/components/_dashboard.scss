@@ -4,7 +4,14 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    min-height: 820px; 
+    min-height: 820px;
+
+    .guide{
+        width: 400px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
     
     .places-list {
         .place {

@@ -11,13 +11,19 @@ export const Dashboard = () => {
         <>
             <div className='dashboard'>
                 <NewPlace/>
-                {!(isEmpty(list![0])) &&
-                    list!.map((point) => {
-                        return <div className='places-list'>
-                            <Place datas={point}/>
-                        </div>
-                    })
-                }
+                <div className='guide'>
+                    <span>En ligne : 🟢</span>
+                    <span>Manque d'infos : 🟡</span>
+                    <span>Non traite : 🔵</span>
+                </div>
+                <div className='places-list'>
+                    {!(isEmpty(list![0])) &&
+                        list!.map((point) => {
+                            return <Place datas={point}/>
+                        })
+                    }
+                </div>
+                
             </div>
         </>
       )
