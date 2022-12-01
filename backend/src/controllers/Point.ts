@@ -52,7 +52,11 @@ const updatePoint = (req : Request, res : Response, next : NextFunction) => {
                 name : point.name,
                 position : point.position,
                 address : point.address,
-                interests : point.interests
+                interests : {
+                    distribution : point.interests.distribution,
+                    douche : point.interests.douche,
+                    wifi : point.interests.wifi
+                }
             }
 
             if (req.body.name) updates.name = req.body.name
@@ -61,6 +65,14 @@ const updatePoint = (req : Request, res : Response, next : NextFunction) => {
                 updates.address = req.body.address
             }
             if (req.body.interests) updates.interests = req.body.interests
+
+            if (req.body.interests) {
+                if (req.body.interests) {
+                    updates.interests.distribution = req.body.interests.distribution
+                    updates.interests.douche = req.body.interests.douche
+                    updates.interests.wifi = req.body.interests.wifi
+                }
+            }
                         
             point.set(updates)
 

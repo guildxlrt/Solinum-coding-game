@@ -6,13 +6,14 @@ import Footer from './components/Footer';
 import AppRoutes from './components/Routes'
 
 function App() {
+  // MANAGE THE LIST
   const [list, setList] = useState<IPoint[] | null>([])
   function updateList( newList : IPoint[]) {
     setList(newList)
-}
+  }
 
+  // GET THE LIST
   const apiPath: string = process.env.REACT_APP_API_URL!;
-
   useEffect(() => {
     (async function getUserDatas() {
       await axios({
@@ -26,6 +27,7 @@ function App() {
       .catch((error) => console.log(error)) 
     })()
   }, []);
+  
   
   return (
     <div className="App">

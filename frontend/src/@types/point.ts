@@ -19,9 +19,21 @@ export interface IPoint {
 export interface INewPoint {
     name : string;
     email : string;
-    position : void | number[];
+    position : void | [number, number];
     address : string;
     interests : {
+        distribution : boolean,
+        douche : boolean,
+        wifi : boolean
+    };
+}
+
+export interface IUpdatePoint {
+    pointId? : string;
+    name? : string;
+    position? : void | [number, number];
+    address? : string;
+    interests? : {
         distribution : boolean,
         douche : boolean,
         wifi : boolean

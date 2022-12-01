@@ -1,22 +1,20 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { IPoint } from '../../@types/point';
-import { useListContext } from '../../appContext';
+import { IPoint } from '../../../@types/point';
+import { useListContext } from '../../../appContext';
 
-export default function Place({datas} : any) {
+export default function State({datas} : any) {
   // API URL
   const apiPath: string = process.env.REACT_APP_API_URL!;
   // UPDATE THE LIST
   const { list, updateList } = useListContext()
 
+  // Button de mise a jour
   const [ clickStatus, setModifyStatus ] = useState(false)
   const [ newStatus, setNewStatus] = useState('')
 
   const updateStatus = async (e : any) => {
     e.preventDefault();
-
-    console.log(newStatus)
-    console.log(datas._id)
     
     // NO MODIF
     if(newStatus === "annuller") {
@@ -55,7 +53,7 @@ export default function Place({datas} : any) {
           else return point
         }) 
         updateList(newList)
-
+        
         // refresh
         setModifyStatus(false)
         setNewStatus('')
@@ -68,22 +66,22 @@ export default function Place({datas} : any) {
   }
 
   return (
-    <div className='place'>
-      <span className='name'>{datas.name}</span>
-      <span className='email'>{datas.email}</span>
-      <span className='address'>{datas.address}</span>  
-      
-      <span className='distribution'>
-        { (datas.interests.distribution === true) && '🥫' }
-      </span> 
-      <span className='douche'>
-        { (datas.interests.douche === true) && '🚿' }
-      </span>
-      <span className='wifi'>
-        { (datas.interests.wifi === true) && '🌐' }
-      </span>
-
-      {(clickStatus === false) && (
+    <>
+      {(clickStatus === true) ? (
+          <div className='updating-state'>
+            <select
+              id="state-selector"
+              onChange={ (e) => setNewStatus(e.target.value) }
+            >
+              <option className='state-select' value="annuller">annuller</option>
+              <option className='state-select-on' value="online">🟢</option>
+              <option className='state-select-off' value="offline">🟡</option>
+            </select>
+            <button
+              onClick={updateStatus}
+            >☑️</button>
+          </div>
+        ): (
         <button
           className='icon'
           onClick={() => setModifyStatus(true)}
@@ -93,21 +91,6 @@ export default function Place({datas} : any) {
           { (datas.state === null) && '🔵' }
         </button>
       )}
-      {(clickStatus === true) && (
-        <div className='updating-state'>
-          <select
-            id="state-selector"
-            onChange={ (e) => setNewStatus(e.target.value) }
-          >
-            <option className='state-select' value="annuller">annuller</option>
-            <option className='state-select-on' value="online">🟢</option>
-            <option className='state-select-off' value="offline">🟡</option>
-          </select>
-          <button
-            onClick={updateStatus}
-          >☑️</button>
-        </div>
-      )}
-    </div>
+    </>
   )
 }

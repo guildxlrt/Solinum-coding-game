@@ -1,14 +1,16 @@
 import React from 'react'
 import { useListContext } from '../../appContext'
 import { isEmpty } from '../../utils/utils'
+import NewPlace from './NewPlace'
 import Place from './Place'
 
-const List : React.FC = () => {
+export const Dashboard = () => {
     const { list } = useListContext()
 
     return (
         <>
-            <div className='places-container'>
+            <NewPlace/>
+            <div className='list-container'>
                 {!(isEmpty(list![0])) &&
                     list!.map((point) => {
                         return <Place datas={point}/>
@@ -19,4 +21,4 @@ const List : React.FC = () => {
       )
 }
 
-export default List
+export default Dashboard
