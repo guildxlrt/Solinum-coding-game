@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 function Navbar() {
@@ -12,6 +12,21 @@ function Navbar() {
                     </div>
                 </NavLink>
             </div>
+
+            <ul className='change-vue'>
+                
+                <li>
+                    <NavLink to="/">
+                        <img src="./images/icons/dashboard.svg" alt="dashboard"/>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/map">
+                        <img src="./images/icons/map.svg" alt="map"/>
+                    </NavLink> 
+                </li>   
+                
+            </ul>
         </div>
     </nav>
   )

@@ -94,13 +94,14 @@ export const Infos = ({datas} : any) => {
   }
 
   return (
-    <div className='editor-new'>
+    <div className='place-infos'>
       {(submitButton) ? (
         <>
-          <form className='submit-form'>
+          <form className='set-infos-form'>
             <div className='name'>
               <h4 className='title'>Nom :</h4>
               <input
+                className=""
                 type="text"
                 id="name"
                 onChange={(e) => setName(e.target.value)}
@@ -113,6 +114,7 @@ export const Infos = ({datas} : any) => {
               <h4 className='title'>Adresse :</h4>
               <Autocomplete>
               <input
+                className=""
                 type="text"
                 id="address"
                 onChange={(e) => setAddress(e.target.value)}
@@ -130,6 +132,7 @@ export const Infos = ({datas} : any) => {
               <div className='checks-container'>
                 <div className='distribution'>
                   <input
+                  className=""
                     type="checkbox"
                     id="distribution-check"
                     onChange={(e) => setDist(!dist)}
@@ -139,6 +142,7 @@ export const Infos = ({datas} : any) => {
               
                 <div className='douche'>
                   <input
+                    className=""
                     type="checkbox"
                     id="douche-check"
                     onChange={(e) => setDouche(!douche)}
@@ -148,6 +152,7 @@ export const Infos = ({datas} : any) => {
               
                 <div className='wifi'>
                   <input
+                    className=""
                     type="checkbox"
                     id="wifi-check"
                     onChange={(e) => setWifi(!wifi)}
@@ -158,38 +163,44 @@ export const Infos = ({datas} : any) => {
               
             </div>
 
-            <button onClick={handleValidation}>Envoyer</button>
-            <button onClick={resetValues}>Annuller</button>
+            <div className='edit-buttons'>
+              <button onClick={handleValidation}>Envoyer</button>
+              <button onClick={resetValues}>Annuller</button>
+            </div>
           </form>
         </>
         ) : (
-        <>
+        <>            
+            <div className='infos'>
+              {(datas.name) && (
+                  <span className='infos-text name'>{datas.name}</span>
+              )}
+              {(datas.email) && (
+                  <span className='infos-text email'>{datas.email}</span>
+              )} 
+              {(datas.address) && (
+                  <span className='infos-text address'>{datas.address}</span>
+              )} 
+
+              <div className='infos-interests'>
+                {(datas.interests.distribution) && (
+                    <span  className='icon distribution'>🥫</span>
+                )}
+
+                {(datas.interests.douche) && (
+                    <span className='icon douche'>🚿</span>
+                )}
+                {(datas.interests.wifi) && (
+                    <span className='icon wifi'>🌐</span>
+                )}
+              </div>              
+            </div>
+            
             <button
+                className='edit-button'
                 onClick={openForm}
             >Modifier</button>
-
-            {(datas.name) && (
-                 <span className='name'>{datas.name}</span>
-            )}
-            {(datas.email) && (
-                 <span className='email'>{datas.email}</span>
-            )} 
-            {(datas.address) && (
-                 <span className='address'>{datas.address}</span>
-            )} 
-            
-            {(datas.interests.distribution) && (
-                <span  className='distribution'>'🥫'</span>
-            )}
-
-            {(datas.interests.douche) && (
-                <span className='douche'>'🚿'</span>
-            )}
-            {(datas.interests.wifi) && (
-                <span className='wifi'>'🌐'</span>
-            )}
         </>
-        
       )}
     </div>
   )

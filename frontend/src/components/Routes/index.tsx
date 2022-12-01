@@ -1,14 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '../../pages';
+import Main from '../../pages/Main';
+import MapVue from '../../pages/MapVue';
 import Navbar from '../Navbar';
 
-function index() {
+function index() {  
   return (
     <BrowserRouter>
         <Navbar/>
         <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Main />} />
+            <Route path="/map" element={<MapVue />} />
         </Routes>
     </BrowserRouter>
   )

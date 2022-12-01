@@ -1,6 +1,5 @@
 import React from "react";
 import { useLoadScript } from "@react-google-maps/api";
-import Map from '../components/Map';
 import Dashboard from "../components/Dashboard";
 
 export const apiKey: string = process.env.REACT_APP_GOOGLE_MAPS_API_KEY!;
@@ -17,7 +16,6 @@ export const Home = () => {
   return (
     <>
       <Dashboard />
-      {/* <Map /> */}
     </>
   );
 }

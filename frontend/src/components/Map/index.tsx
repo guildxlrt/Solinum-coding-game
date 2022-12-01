@@ -28,6 +28,7 @@ export default function Map() {
   )
 
   const onLoad = useCallback((map : any) => (mapRef.current = map), []);
+
   
   return (
     <div className="container">

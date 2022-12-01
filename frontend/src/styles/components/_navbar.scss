@@ -1,14 +1,40 @@
 .nav-container {
     background-color: $white;
-    margin: 10px;
-}
+    margin: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-.logo {
+  .logo {
     display: flex;
     align-items: center;
-    
     img {
       height: 50px;
       width: 150px;
     }
-}    
+  }
+
+  .change-vue{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+
+    .li {
+      margin: 0px 0px;
+    }
+
+    svg, img {
+      margin: 0px 20px;
+      height: 35px;
+      width: 35px;
+      cursor: pointer;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      height: 100%;
+    }
+  }
+}
+

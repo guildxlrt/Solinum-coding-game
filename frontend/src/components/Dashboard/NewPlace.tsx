@@ -85,11 +85,11 @@ export const NewPlace = () => {
   }
   
   return (
-    <div className='editor-new'>
+    <div className='add-place'>
       {(submitButton) ? (
         <>
           <h2>Ajouter un emplacement</h2>
-          <form className='submit-form'>
+          <form className='add-form'>
             <div className='name'>
               <h4 className='title'>Nom :</h4>
               <input
@@ -162,14 +162,18 @@ export const NewPlace = () => {
               
             </div>
 
-            <button onClick={handleValidation}>Envoyer</button>
-            <button onClick={resetValues}>Annuller</button>
+            <div className='edit-buttons'>
+              <button onClick={handleValidation}>Envoyer</button>
+              <button onClick={resetValues}>Annuller</button>
+            </div>
           </form>
         </>
       ) : (
         <button
           onClick={openForm}
-        >Ajouter un lieu</button>
+        >
+          Ajouter un emplacement
+        </button>
       )}
 
 

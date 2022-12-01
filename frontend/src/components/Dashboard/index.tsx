@@ -9,11 +9,13 @@ export const Dashboard = () => {
 
     return (
         <>
-            <NewPlace/>
-            <div className='list-container'>
+            <div className='dashboard'>
+                <NewPlace/>
                 {!(isEmpty(list![0])) &&
                     list!.map((point) => {
-                        return <Place datas={point}/>
+                        return <div className='places-list'>
+                            <Place datas={point}/>
+                        </div>
                     })
                 }
             </div>
