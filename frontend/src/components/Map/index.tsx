@@ -7,6 +7,10 @@ import {
   Circle,
   MarkerClusterer,
 } from "@react-google-maps/api";
+import { useListContext } from "../../appContext";
+import { isEmpty } from "../../utils/utils";
+
+const { list } = useListContext()
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 // type DirectionsResult = google.maps.DirectionsResult;
@@ -29,7 +33,6 @@ export default function Map() {
 
   const onLoad = useCallback((map : any) => (mapRef.current = map), []);
 
-  
   return (
     <div className="container">
       
@@ -41,7 +44,20 @@ export default function Map() {
           options={options}
           onLoad={onLoad}
         >
-
+          {!(isEmpty(list![0])) &&
+            list!.map((point) => {
+              if (point.status === true) {
+                return <div
+                  className='places-list'
+                >
+                  <Marker position={{
+                      lat : point.position[0],
+                      lng : point.position[1]
+                    }}/>
+                </div>
+              }
+          })}
+          
         </GoogleMap>
       </div>
     </div>

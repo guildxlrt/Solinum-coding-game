@@ -170,14 +170,12 @@ export const NewPlace = () => {
         </>
       ) : (
         <button
+          className='edit-button'
           onClick={openForm}
         >
           Ajouter un emplacement
         </button>
       )}
-
-
-      
     </div>
   )
 }
