@@ -12,9 +12,16 @@ export const Dashboard = () => {
             <div className='dashboard'>
                 <NewPlace/>
                 <div className='guide'>
-                    <span>En ligne : 🟢</span>
-                    <span>Manque d'infos : 🟡</span>
-                    <span>Non traite : 🔵</span>
+                    <div className='status'>
+                        <span>En ligne : 🟢</span>
+                        <span>Manque d'infos : 🟡</span>
+                        <span>Non traite : 🔵</span>
+                    </div>
+                    <div className='interests'>
+                        <span>Distribution : 🥫</span>
+                        <span>Douches : 🚿</span>
+                        <span>Wifi : 🌐</span>
+                    </div>
                 </div>
                 <div className='places-list'>
                     {!(isEmpty(list![0])) &&

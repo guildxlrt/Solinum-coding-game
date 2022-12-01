@@ -7,10 +7,20 @@
     min-height: 820px;
 
     .guide{
-        width: 400px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
+        height: 60px;
+
+        .status, .interests{
+            width: 450px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            span {
+                width: 140px;
+            }
+        }
     }
     
     .places-list {
