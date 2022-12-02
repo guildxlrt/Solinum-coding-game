@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiKey } from "../pages/Main";
+import { apiKey } from "../pages/Dashboard";
 
 const geocodeApiPath = 'https://maps.googleapis.com/maps/api/geocode/json';
 

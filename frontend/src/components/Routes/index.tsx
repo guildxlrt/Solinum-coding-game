@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Main from '../../pages/Main';
+import Main from '../../pages/Dashboard';
 import MapVue from '../../pages/MapVue';
 import Navbar from '../Navbar';
 

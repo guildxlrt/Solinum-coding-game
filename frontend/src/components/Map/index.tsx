@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMemo, useCallback, useRef } from "react";
 import {
   GoogleMap,
-  Marker,
+  MarkerF,
+  InfoWindow
 } from "@react-google-maps/api";
 import { useListContext } from "../../appContext";
 import { isEmpty } from "../../utils/utils";
-
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 // type DirectionsResult = google.maps.DirectionsResult;
 type MapOptions = google.maps.MapOptions;
 
 export default function Map() {
+
+  const [activeMarker, setActiveMarker] = useState<string | null>(null);
+
+  const initialPoint = { lat: 46.1390437, lng: 2.434835 }
+
   const mapRef =  useRef<GoogleMap>()
   const center = useMemo<LatLngLiteral>(
-    () => ({ lat: 46.1390437, lng: 2.434835 }),
+    () => (initialPoint), // position de la France
     []
   );
   const options = useMemo<MapOptions>(
@@ -29,6 +34,8 @@ export default function Map() {
   const onLoad = useCallback((map : any) => (mapRef.current = map), []);
   const { list } = useListContext()
 
+
+
   return (
     <div className="container">      
       <div className="map">
@@ -39,17 +46,40 @@ export default function Map() {
           options={options}
           onLoad={onLoad}
         >
+          
           {!(isEmpty(list![0])) &&
             list!.map((point) => {
               if (point.status === true) {
-                console.log(point.status)
-                return <Marker
-                  key={point._id}
-                  position={{
-                    lat : point.position[0],
-                    lng : point.position[1]
-                  }}
-                />
+                 
+                return <MarkerF
+                    key={point._id}
+                    position={{
+                      lat : point.position[0],
+                      lng : point.position[1]
+                    }}
+                    onClick={() => setActiveMarker(point._id)}
+                  >
+                    { activeMarker === point._id ? (
+                      <InfoWindow
+                        onCloseClick={() => setActiveMarker(null)}
+                      >
+                        <div className="infos">
+                          <span>{point.name}</span>
+                          <div className="interests">
+                            {(point.interests.distribution) && (
+                                <span>🥫</span>
+                            )}
+                              {(point.interests.douche) && (
+                                <span>🚿</span>
+                            )}
+                            {(point.interests.wifi) && (
+                                <span>🌐</span>
+                            )}
+                          </div>
+                        </div>
+                      </InfoWindow>
+                    ) : null }
+                  </MarkerF>
               }
           })}
           
