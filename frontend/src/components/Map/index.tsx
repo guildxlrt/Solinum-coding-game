@@ -65,7 +65,7 @@ export default function Map() {
                         onCloseClick={() => setActiveMarker(null)}
                       >
                         <div className="bubble">
-                          <span>{point.name}</span>
+                          <h3>{point.name}</h3>
                           <div className="interests">
                             {(point.interests.distribution) && (
                                 <span>🥫</span>
