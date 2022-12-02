@@ -8,9 +8,10 @@
     width: 50%;
 
     .top-block{
-        position: fixed;
+        position: sticky;
         background-color: $white;
-
+        z-index: 1;
+        top: 70px;
     }
 
     .guide{
@@ -18,6 +19,8 @@
         flex-direction: column;
         justify-content: space-between;
         height: 60px;
+        padding-top: 20px;
+        padding-bottom: 70px;
 
         .status, .interests{
             width: 465px;
@@ -32,10 +35,7 @@
     }
     
     .places-list {
-        .under-block {
-            width: 465px;
-            height: 191px;
-        }
+        z-index: auto;
         .place {
             margin: 45px 0px ;
             display: flex;
@@ -164,7 +164,8 @@
     }
 
     .add-place {
-        margin: 45px 0px ;
+        margin-top: 50px;
+        margin-bottom: 20px;
         
         .add-form {
             margin-top: 30px ;

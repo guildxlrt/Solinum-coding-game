@@ -26,7 +26,6 @@ export const Dashboard = () => {
                     </div>
                 </div>
                 <div className='places-list'>
-                    <div className='under-block'/>
                     {!(isEmpty(list![0])) &&
                         list!.map((point) => {
                             return <Place datas={point}/>
