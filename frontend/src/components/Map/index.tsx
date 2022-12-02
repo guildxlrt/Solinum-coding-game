@@ -3,7 +3,8 @@ import { useMemo, useCallback, useRef } from "react";
 import {
   GoogleMap,
   MarkerF,
-  InfoWindow
+  InfoWindow,
+  InfoWindowF
 } from "@react-google-maps/api";
 import { useListContext } from "../../appContext";
 import { isEmpty } from "../../utils/utils";
@@ -37,7 +38,7 @@ export default function Map() {
 
 
   return (
-    <div className="container">      
+    <div className="google-maps">      
       <div className="map">
         <GoogleMap
           zoom={6}
@@ -60,10 +61,10 @@ export default function Map() {
                     onClick={() => setActiveMarker(point._id)}
                   >
                     { activeMarker === point._id ? (
-                      <InfoWindow
+                      <InfoWindowF
                         onCloseClick={() => setActiveMarker(null)}
                       >
-                        <div className="infos">
+                        <div className="bubble">
                           <span>{point.name}</span>
                           <div className="interests">
                             {(point.interests.distribution) && (
@@ -77,7 +78,7 @@ export default function Map() {
                             )}
                           </div>
                         </div>
-                      </InfoWindow>
+                      </InfoWindowF>
                     ) : null }
                   </MarkerF>
               }

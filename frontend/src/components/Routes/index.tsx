@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Main from '../../pages/Dashboard';
-import MapVue from '../../pages/MapVue';
+import Main from '../../pages/Main';
 import Navbar from '../Navbar';
 
 function index() {  
@@ -10,7 +9,6 @@ function index() {
         <Navbar/>
         <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/map" element={<MapVue />} />
         </Routes>
     </BrowserRouter>
   )

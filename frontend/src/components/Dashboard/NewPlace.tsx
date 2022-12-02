@@ -97,7 +97,7 @@ export const NewPlace = () => {
                 id="name"
                 onChange={(e) => setName(e.target.value)}
                 value={name}
-                placeholder="nom de l'etablissement"
+                placeholder="intitule du lieu"
               />
             </div>
 

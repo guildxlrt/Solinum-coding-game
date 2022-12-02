@@ -1,4 +1,5 @@
-.nav-container {
+.navbar {
+    position: fixed;
     background-color: $white;
     margin: 10px 10px 10px 10px;
     display: flex;
@@ -11,31 +12,6 @@
     img {
       height: 50px;
       width: 150px;
-    }
-  }
-
-  .change-vue{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-right: 50px;
-    position: relative;
-    top : 8px;
-
-    .li {
-      margin: 0px 0px;
-    }
-
-    svg, img {
-      margin: 0px 20px;
-      height: 35px;
-      width: 35px;
-      cursor: pointer;
-      display: grid;
-      align-items: center;
-      justify-items: center;
-      height: 100%;
     }
   }
 }

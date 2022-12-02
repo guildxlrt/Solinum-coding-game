@@ -5,6 +5,13 @@
     justify-content: flex-start;
     align-items: center;
     min-height: 820px;
+    width: 50%;
+
+    .top-block{
+        position: fixed;
+        background-color: $white;
+
+    }
 
     .guide{
         display: flex;
@@ -13,17 +20,22 @@
         height: 60px;
 
         .status, .interests{
-            width: 450px;
+            width: 465px;
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
             span {
                 width: 140px;
+                font-size: 16px;
             }
         }
     }
     
     .places-list {
+        .under-block {
+            width: 465px;
+            height: 191px;
+        }
         .place {
             margin: 45px 0px ;
             display: flex;
@@ -62,6 +74,7 @@
 
                         .icon {
                             font-size: 20px;
+                            padding-right: 30px;
                         }
                     }
                 }
