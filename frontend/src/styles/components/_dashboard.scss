@@ -6,6 +6,12 @@
     align-items: center;
     min-height: 820px;
     width: 50%;
+    min-width: 465px;
+
+    @media screen and (max-width: 1030px) {
+        width: 100%;
+        margin: 0% ;
+    }   
 
     .top-block{
         position: sticky;
@@ -36,6 +42,9 @@
     
     .places-list {
         z-index: auto;
+        @media screen and (max-width: 1030px) {
+            margin: 45px 0px ;
+        }
         .place {
             margin: 45px 0px ;
             display: flex;
@@ -166,6 +175,19 @@
     .add-place {
         margin-top: 50px;
         margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @media screen and (max-width: 1030px) {
+            margin-top: 100px;
+        }
+
+        h2 {
+            width: fit-content;
+            position :relative;
+            left: 100px;
+        }
         
         .add-form {
             margin-top: 30px ;
@@ -182,7 +204,7 @@
 
                 input {
                     padding: 5px;
-                    width: 328px;
+                    width: 365px;
                     position: relative;
                     top: -4px;
                 }
@@ -214,9 +236,11 @@
             .edit-buttons {
                 display: flex;
                 flex-direction: row;
-                justify-content: space-around;
+                justify-content: space-between;
                 position: relative;
-                left: -57px;
+                left: 100px;
+                width: 300px;
+
                 button {
                     border-radius: 30px;
                 }
