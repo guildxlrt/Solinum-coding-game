@@ -26,6 +26,7 @@ export async function geocoding(address : string) {
     withCredentials : false
   })
   .then((res) => {
+    console.log(res.data.results[0])
     return res.data.results[0].geometry.location
   })
   .catch((error) => console.error(error))

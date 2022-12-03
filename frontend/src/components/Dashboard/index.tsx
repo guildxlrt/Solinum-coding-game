@@ -18,11 +18,11 @@ export const Dashboard = () => {
                             <span>Manque d'infos : 🟡</span>
                             <span>Non traite : 🔵</span>
                         </div>
-                        <div className='interests'>
+                        {/* <div className='interests'>
                             <span>Distribution : 🥫</span>
                             <span>Douches : 🚿</span>
                             <span>Wifi : 🌐</span>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className='places-list'>

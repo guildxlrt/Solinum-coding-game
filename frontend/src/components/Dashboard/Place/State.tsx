@@ -73,9 +73,9 @@ export default function State({datas} : any) {
               id={"state-selector-"+datas._id}
               onChange={ (e) => setNewStatus(e.target.value) }
             >
-              <option className='state-select' value="annuller">annuller</option>
-              <option className='state-select-on' value="online">🟢</option>
-              <option className='state-select-off' value="offline">🟡</option>
+              <option className='annul' value="annuller">annuller</option>
+              <option className='online' value="online">🟢</option>
+              <option className='offline' value="offline">🟡</option>
             </select>
             <button
               onClick={updateStatus}

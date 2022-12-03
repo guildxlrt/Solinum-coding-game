@@ -1,6 +1,6 @@
 import { Autocomplete } from '@react-google-maps/api';
 import axios from 'axios';
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { IPoint, IUpdatePoint } from '../../../@types/point';
 import { useListContext } from '../../../appContext';
 import { geocoding } from '../../../utils/googleapi';
@@ -31,16 +31,17 @@ export const Infos = ({datas} : any) => {
   
   const openForm = (e : any) => {
     e.preventDefault();
-    
     setSubmitButton(!submitButton)
   }
 
   const handleValidation = async (e : any) => {
     e.preventDefault();
 
+    // get address
     const returnedAddress = addressRef.current!.value!
     setAddress(returnedAddress)
-
+    // errors
+    const updateError = document.querySelector('.error.update')
     // GET MAP POSITION
     const data = await geocoding(addressRef.current!.value)
     
@@ -66,30 +67,31 @@ export const Infos = ({datas} : any) => {
           data : formDatas
         })
         .then(() => {
-        alert("Le status a ete mit a jour !")
+          alert("Le status a ete mit a jour !")
 
-        delete formDatas.pointId
-
-        // UPDATE THE RENDER
-        const newList : IPoint[] = list!.map((point) => {
-          if (point._id === datas._id) {
-            return {
-              ...point,
-              ...formDatas
+          delete formDatas.pointId
+          // UPDATE THE RENDER
+          const newList : IPoint[] = list!.map((point) => {
+            if (point._id === datas._id) {
+              return {
+                ...point,
+                ...formDatas
+              }
             }
-          }
-          else return point
-        }) 
-        updateList(newList)
-        
-        // refresh
-        resetValues()
-      })
+            else return point
+          }) 
+          updateList(newList)
+          
+          // refresh
+          resetValues()
+        })
         .catch((error) => {
-          console.error(error)
-          return { "error" : error }
+          return updateError!.innerHTML = error.response.data.error
         })
       }
+    }
+    else {
+      updateError!.innerHTML = "L'adresse doit etre valide"
     }
   }
 
@@ -132,36 +134,41 @@ export const Infos = ({datas} : any) => {
               <div className='checks-container'>
                 <div className='distribution'>
                   <input
-                  className=""
+                  className="distribution"
                     type="checkbox"
-                    id="distribution-check"
+                    id={"distribution-check-"+datas._id}
                     onChange={(e) => setDist(!dist)}
+                    defaultChecked={datas.interests.distribution && true}
                   />
                   <label htmlFor="distribution">Distribution</label>
                 </div>
               
                 <div className='douche'>
                   <input
-                    className=""
+                    className="douche"
                     type="checkbox"
-                    id="douche-check"
+                    id={"douche-check-"+datas._id}
                     onChange={(e) => setDouche(!douche)}
+                    defaultChecked={datas.interests.douche && true}
                   />
                   <label htmlFor="douche">Douche</label>
                 </div>
               
                 <div className='wifi'>
                   <input
-                    className=""
+                    className="wifi"
                     type="checkbox"
-                    id="wifi-check"
+                    id={"wifi-check-"+datas._id}
                     onChange={(e) => setWifi(!wifi)}
+                    defaultChecked={datas.interests.wifi && true}
                   />
                   <label htmlFor="wifi">Wifi</label>
                 </div>
               </div>
               
             </div>
+
+            <span className='error update'></span>
 
             <div className='edit-buttons'>
               <button onClick={handleValidation}>Envoyer</button>

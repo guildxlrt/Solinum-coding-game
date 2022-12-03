@@ -39,8 +39,11 @@ export const NewPlace = () => {
   const handleValidation = async (e : any) => {
     e.preventDefault();
 
+    // get address
     const returnedAddress = addressRef.current!.value!
     setAddress(returnedAddress)
+    // errors
+    const submitError = document.querySelector('.error.submit')
 
     // GET MAP POSITION
     const data = await geocoding(addressRef.current!.value)
@@ -77,10 +80,12 @@ export const NewPlace = () => {
           updateList(newList)
         })
         .catch((error) => {
-          console.error(error)
-          return { "error" : error }
+          return submitError!.innerHTML = error.response.data.error
         })
       }
+    }
+    else {
+      submitError!.innerHTML = "L'adresse doit etre valide"
     }
   }
   
@@ -159,8 +164,9 @@ export const NewPlace = () => {
                   <label htmlFor="wifi">Wifi</label>
                 </div>
               </div>
-              
             </div>
+
+            <span className='error submit'></span>
 
             <div className='edit-buttons'>
               <button onClick={handleValidation}>Envoyer</button>
