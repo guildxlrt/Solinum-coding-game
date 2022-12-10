@@ -3,7 +3,6 @@ import { useMemo, useCallback, useRef } from "react";
 import {
   GoogleMap,
   MarkerF,
-  InfoWindow,
   InfoWindowF
 } from "@react-google-maps/api";
 import { useListContext } from "../../appContext";
@@ -38,7 +37,7 @@ export default function Map() {
 
 
   return (
-    <div className="google-maps">      
+    <div className="google-maps">
       <div className="map">
         <GoogleMap
           zoom={6}

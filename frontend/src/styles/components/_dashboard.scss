@@ -9,7 +9,7 @@
     min-width: 465px;
 
     @media screen and (max-width: 1030px) {
-        width: fit-content;
+        width: 100%;
         margin: 0% ;
     }   
 
@@ -23,7 +23,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-width: 280;
+            min-width: 280px;
+            width: 100%;
         }
     }
 
@@ -34,7 +35,9 @@
         height: 60px;
         padding-top: 20px;
         padding-bottom: 40px;
-
+        @media screen and (max-width: 585px) {
+            padding-bottom: 80px;
+        }
 
         .status, .interests{
             width: 465px;
@@ -59,7 +62,7 @@
     .places-list {
         z-index: auto;
         @media screen and (max-width: 1030px) {
-            margin: 200px 0px ;
+            margin: 100px 0px ;
         }
         .place {
             margin: 45px 0px ;
@@ -89,6 +92,11 @@
                     border-radius: 30px;
                     position: relative;
                     top: -10px;
+                    @media screen and (max-width: 585px) {
+                        margin-top: 25px;
+                        padding: 7px 15px;
+                        height: fit-content;
+                    }
                 }
 
                 .infos {
@@ -171,7 +179,9 @@
                         left: -45px;
                         @media screen and (max-width: 585px) {
                             left: 0px;
+                            width: 250px;
                         }
+                        
                         button {
                             border-radius: 30px;
                         }

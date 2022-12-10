@@ -180,7 +180,7 @@ export const Infos = ({datas} : any) => {
         <>            
             <div className='infos'>
               {(datas.name) && (
-                  <span className='infos-text name'>{datas.name}</span>
+                  <h3 className='infos-text name'>{datas.name}</h3>
               )}
               {(datas.email) && (
                   <span className='infos-text email'>{datas.email}</span>
